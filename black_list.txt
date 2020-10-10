@@ -1,10 +1,2 @@
-'apollo11', 'apollo14', 'apollo15', 
-'luna17', 'luna21', 
-'SGA512SUMS', 
-'glonass103','glonass105', 'glonass106', 'glonass107', 'glonass116', 'glonass119', 'glonass120', 'glonass121', 'glonass122', 'glonass125', 'glonass126', 'glonass127', 'glonass128', 'glonass129', 'glonass131', 'glonass132','glonass133', 'glonass134', 'glonass135', 'glonass136', 'glonass137', 'glonass138', 'glonass139', 'glonass140', 
-'galileo101', 'galileo102', 'galileo103', 'galileo104', 'galileo201', 'galileo202', 'galileo203', 'galileo204', 'galileo205', 'galileo206', 'galileo207',  'galileo208', 'galileo209', 'galileo210','galileo211', 'galileo212', 'galileo213', 'galileo214', 'galileo215', 'galileo216', 'galileo217', 'galileo218', 'galileo219', 'galileo220', 'galileo221', 'galileo222', 
-'qzs1', 'qzs2', 'qzs3', 'qzs4',
-'gps36', 
- 'compassg1', 'compassi3', 'compassi5', 'compassi6b',  'compassm3', 
- 'irnss1i',
-beidou3m10', 'beidou3m2', 'beidou3m3', 'beidou3m9' 
+'sattellite1', 'satellite2', 'input_the_name_of_the_satellite_you_do_not_wish_to_observe', 
+for example: 'luna17'
