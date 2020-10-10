@@ -1,4 +1,4 @@
-# SLR-Observatory-Pipeline
+# SLR Observatory Pipeline
 This package can be used by Satellite Laser Ranging observatories to download and archive ephemerides data. 
 
 ## Downloading Ephemerides
@@ -6,3 +6,6 @@ This program downloads ephemerides from the international IRLS datacenter via ft
 
 ## Catalogue Clearing
 This program archives and deleates  directories with the observational data. It finds and selects specific extensions (.oga; .esa etc.), archives them, and deleates old directories. It detects whether a flashdrive is inserted and if it isn't the program will not start. This is done to make sure that data on the observatory flash drive is wiped out as well. 
+
+## About 
+This software was developed for the Satellite Laser Ranging Observatory located in Kyiv, Ukraine. It is actively used to download and archive data. 
