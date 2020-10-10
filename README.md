@@ -1,4 +1,4 @@
-# SLR Observatory Pipeline
+# SLR Observatory Data Pipeline
 This package can be used by Satellite Laser Ranging observatories to download and archive ephemerides data. 
 
 ## Downloading Ephemerides
