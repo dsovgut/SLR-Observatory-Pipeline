@@ -13,9 +13,9 @@ import time
 
 # In[19]:
 
-ftp = FTP ('edc.dgfi.tum.de')
+ftp = FTP ('address')
 ftp.login()
-ftp.cwd('/pub/slr/cpf_predicts/current/')
+ftp.cwd('prediction_directory')
 
 
 # In[20]:
@@ -24,18 +24,14 @@ print("program started")
 time.sleep(1)
 
 
-# In[21]:
-
-with open('D:\eph/black_list.txt', 'r') as file:
+#make a blacklist.txt file and input the satellites you don't want to observe
+with open('D:\eph/black_list.txt', 'r') as file: 
     black_list = file.read().replace('\n','')
-
-
-# In[22]:
 
 file_names = ftp.nlst()
 
+#getting satellite names from the server
 uniqs = []
-
 for n in file_names:
     base = n.split('_')[0]
     if not base in uniqs and not base in black_list:
@@ -49,16 +45,12 @@ print("# received all last file names")
 time.sleep(0.5)
 
 
-# In[23]:
-
 for u in uniqs:
     masiv = []
     ftp.dir(u + '*', masiv.append)
     all_last_files.append(masiv[-1].split(' ')[-1])
 
-
-# In[24]:
-
+#creating a temporary folder to store files
 newpath = r'D:\eph\WOW1' 
 
 if os.path.exists(newpath):
@@ -66,22 +58,14 @@ if os.path.exists(newpath):
 else:
     os.makedirs(newpath)  
 
-
-# In[25]:
-
 savedir = 'D:\eph\WOW1'
 os.chdir(savedir)
 
-
-# In[26]:
 
 for u in all_last_files:
     file = open(u, 'wb')
     ftp.retrbinary("RETR " + u, file.write)
     file.close()
-
-
-# In[38]:
 
 with open('D:\eph\ephem', 'w+') as outfile:
     for fname in all_last_files:
@@ -89,36 +73,19 @@ with open('D:\eph\ephem', 'w+') as outfile:
             outfile.write(infile.read())
             outfile.write("\n")
             
-
-
-# In[14]:
-
 savedir = 'D:\eph'
 os.chdir(savedir)
 
-
-# In[15]:
-
+#deleating temporary folder
 shutil.rmtree('D:\eph\WOW1')
 
-
-# _____________________________________________________________________________________________________________________________
-
-# In[62]:
-
-#ftp = FTP_TLS('ftps://sentinelspodext.gmv.com')
-#ftp = FTP_TLS('146.255.101.161')
-#146.255.101.161
-#ftp = FTP_TLS('sentinelspodext.gmv.com')
-#cpodextftp.gmv.com
-ftp = FTP_TLS('cpodextftp.gmv.com')
-ftp.login(user='glsl', passwd = 'JrBdMe7s')
+#retreiving sentinel from a separate connection
+ftp = FTP_TLS('website.gov') #input your own website
+ftp.login(user='user', passwd = 'passwd') #input your own credentials
 ftp.prot_p()
-ftp.cwd('/slr/predicts/sentinel3a/')
+ftp.cwd('/slr/predicts/sentinel3a/') #address of the sentinel data on the IRLS server
 
-
-# In[63]:
-
+#creating a temp folder for sentinel data
 newpath = r'D:\eph\WOW2' 
 
 if os.path.exists(newpath):
@@ -126,14 +93,8 @@ if os.path.exists(newpath):
 else:
     os.makedirs(newpath) 
 
-
-# In[64]:
-
 savedir = 'D:\eph\WOW2'
 os.chdir(savedir)
-
-
-# In[65]:
 
 file_names = ftp.nlst()
 
@@ -156,8 +117,6 @@ file = open(sentinel3a[0], 'wb')
 ftp.retrbinary("RETR " + sentinel3a[0], file.write)
 file.close()
 
-
-# In[66]:
 
 ftp.cwd('/slr/predicts/sentinel3b/')
 
@@ -182,18 +141,13 @@ file = open(sentinel3b[0], 'wb')
 ftp.retrbinary("RETR " + sentinel3b[0], file.write)
 file.close()
 
-
-# In[67]:
-
+#adding sentinel data to the ephemerides file
 filenames = [sentinel3a[0], sentinel3b[0]]
 with open('D:\eph\ephem', 'a+') as outfile:
     for fname in filenames:
         with open(fname) as infile:
             outfile.write(infile.read())
             outfile.write("\n")
-
-
-# In[68]:
 
 savedir = 'D:\eph'
 os.chdir(savedir)
