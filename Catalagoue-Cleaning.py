@@ -12,9 +12,7 @@ import shutil
 import time 
 import sys
 
-
-# In[2]:
-
+#function checking if a disk is connected  
 def get_available_drives():
     if 'Windows' not in platform.system():
         return []
@@ -22,30 +20,18 @@ def get_available_drives():
     return list(itertools.compress(string.ascii_uppercase,
                map(lambda x:ord(x) - ord('0'), bin(drive_bitmask)[:1:-1])))
 
-
-# In[3]:
-
 #checking if disk z is connected
 if 'Z' not in get_available_drives():
     print ("Connect Disk Z for program to work.")
 else:
   print ("Disk Z is connected. Program Started.")
 
-
-# In[23]:
-
 dpath = r'D:\archiv2\temp'
 os.makedirs(dpath)  
 
-
-# In[24]:
-
-#Clearing the files on disk Z
+#Clearing a catalog files on disk Z
 path1 = r'Z:\spl\result\catalog.loc'
 open(path1, 'w').close()
-
-
-# In[25]:
 
 #deleating everything in the folder calibrate
 folder = r'Z:\calibrate'
@@ -58,9 +44,6 @@ for the_file in os.listdir(folder):
     except Exception as e:
         print(e)
 
-
-# In[26]:
-
 #deleating everything in the folder calibrate1
 folder = r'Z:\calibrate1'
 for the_file in os.listdir(folder):
@@ -72,9 +55,6 @@ for the_file in os.listdir(folder):
     except Exception as e:
         print(e)
 
-
-# In[27]:
-
 folder = r'Z:\locat'
 for the_file in os.listdir(folder):
     file_path = os.path.join(folder, the_file)
@@ -85,28 +65,16 @@ for the_file in os.listdir(folder):
     except Exception as e:
         print(e)
 
-
-# In[28]:
-
 path2 = r'Z:\calibrate\catalog.kal'
 open(path2, 'w').close()
-
-
-# In[29]:
 
 start= r"D:\LASER-2\DATA\KAT_OBS.DIC"
 end = r'D:\archiv2\temp'
 shutil.copy(start,end)
 
-
-# In[30]:
-
 start= r"D:\LASER-2\DATA\KAT_KAL.DIC"
 end = r'D:\archiv2\temp'
 shutil.copy(start,end)
-
-
-# In[31]:
 
 start= r"D:\LASER-2\DATA\KAT_KBO.DIC"
 end = r'D:\archiv2\temp'
@@ -155,8 +123,7 @@ for source_filename in os.listdir(source_directory_path):
 
 
 
-# In[33]:
-
+#getting specific extensions which start with T and K and have a number in them
 import glob
 path3 = r"D:\LASER-2\DATA"
 os.chdir(path3)
@@ -167,9 +134,6 @@ source = r'D:\archiv2\temp'
 for u in files:
     shutil.copy(u,source)
 
-
-# In[34]:
-
 #giving the temp folder a name with a date
 from datetime import datetime
 directory = r'D:\archiv2'
@@ -177,20 +141,11 @@ os.chdir(directory)
 name = r'temp'
 os.rename(name, datetime.today().strftime('%Y_%m_%d'))
 
-
-# In[35]:
-
 #archiving files
 shutil.make_archive(datetime.today().strftime('%Y_%m_%d'), 'zip', datetime.today().strftime('%Y_%m_%d'))
 
-
-# In[36]:
-
 #deleating the folder, leaving only archived folder
 shutil.rmtree(datetime.today().strftime('%Y_%m_%d'))
-
-
-# In[37]:
 
 directory = r"D:\LASER-2\DATA"
 os.chdir(directory)
@@ -198,8 +153,6 @@ open('KAT_OBS.DIC', 'w').close()
 open('KAT_KAL.DIC', 'w').close()
 open('KAT_KBO.DIC', 'w').close()
 
-
-# In[38]:
 
 import glob
 for file in glob.glob('*ega'):
@@ -219,16 +172,10 @@ for file in glob.glob('*prn'):
 for file in glob.glob('T?*.K*[0-99]'):
     os.remove(file)
 
-
-# In[39]:
-
 path4 = r"D:\LASER-2\DATA"
 os.chdir(path4)
 for file in glob.glob('T?*.K*[0-99]'):
     os.remove(file)
-
-
-# In[40]:
 
 print('program completed')
 
